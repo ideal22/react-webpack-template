@@ -25,22 +25,6 @@ const optimization = () => {
 
 const filename = (ext) => (isDev ? `[name].${ext}` : `[name].[hash].${ext}`)
 
-const babelOptions = () => {
-  const opts = {
-    presets: [
-      '@babel/preset-env',
-      '@babel/preset-react',
-      '@babel/preset-typescript',
-    ],
-    plugins: [
-      '@babel/plugin-proposal-class-properties',
-      '@babel/plugin-syntax-jsx',
-    ],
-  }
-
-  return opts
-}
-
 const plugins = () => {
   const base = [
     new HTMLWebpackPlugin({
@@ -61,6 +45,5 @@ const plugins = () => {
 module.exports = {
   optimization,
   filename,
-  babelOptions,
   plugins,
 }

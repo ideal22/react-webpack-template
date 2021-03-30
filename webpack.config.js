@@ -1,11 +1,6 @@
 const path = require('path')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const {
-  optimization,
-  filename,
-  babelOptions,
-  plugins,
-} = require('./webpack.utils')
+const { optimization, filename, plugins } = require('./webpack.utils')
 
 const isDev = process.env.NODE_ENV === 'development'
 
@@ -20,7 +15,7 @@ module.exports = {
     path: path.resolve(__dirname, 'build'),
   },
   resolve: {
-    extensions: ['.js', '.json', '.png', '.jsx', '.ts'],
+    extensions: ['.js', '.json', '.png', '.jsx', '.ts', '.tsx'],
     alias: {
       '@': path.resolve(__dirname, 'src'),
     },
@@ -48,9 +43,8 @@ module.exports = {
       },
       {
         test: /\.(jsx|js|ts)$/,
+        use: ['babel-loader', 'eslint-loader'],
         exclude: /node_modules/,
-        loader: 'babel-loader',
-        options: babelOptions(),
       },
     ],
   },
