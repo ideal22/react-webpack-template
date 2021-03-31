@@ -1,6 +1,11 @@
 const path = require('path')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const { optimization, filename, plugins } = require('./webpack.utils')
+const {
+  optimization,
+  filename,
+  plugins,
+  cssLoaders,
+} = require('./webpack.utils')
 
 const isDev = process.env.NODE_ENV === 'development'
 
@@ -31,7 +36,7 @@ module.exports = {
     rules: [
       {
         test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader'],
+        use: cssLoaders(),
       },
       {
         test: /\.(png|jpg|svg|gif|ico|icon)$/,
@@ -40,6 +45,14 @@ module.exports = {
       {
         test: /\.(ttf|woff|woff2|eot)$/,
         use: ['file-loader'],
+      },
+      {
+        test: /\.less$/,
+        use: cssLoaders('less-loader'),
+      },
+      {
+        test: /\.s[ac]ss$/,
+        use: cssLoaders('sass-loader'),
       },
       {
         test: /\.(jsx|js|ts)$/,

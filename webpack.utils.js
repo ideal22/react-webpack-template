@@ -42,8 +42,19 @@ const plugins = () => {
   return base
 }
 
+const cssLoaders = (extra) => {
+  const loaders = [MiniCssExtractPlugin.loader, 'css-loader']
+
+  if (extra) {
+    loaders.push(extra)
+  }
+
+  return loaders
+}
+
 module.exports = {
   optimization,
   filename,
   plugins,
+  cssLoaders,
 }
